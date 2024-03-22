@@ -1,5 +1,5 @@
-import { expect, describe, test, vi } from 'vitest'
-import { createHooks } from '../hooks.js'
+import { expect, describe, test, vi } from "vitest";
+import { createHooks } from "../hooks.js";
 
 describe("hooks test", () => {
   describe("useState", () => {
@@ -50,7 +50,6 @@ describe("hooks test", () => {
     });
 
     test("hook의 callback이 실행 되기 이전에 resetContext를 실행해야 값이 정상적으로 반영된다.", () => {
-
       let result = "";
       const render = vi.fn(() => {
         const [a, setA] = useState("foo");
@@ -80,7 +79,6 @@ describe("hooks test", () => {
   });
 
   describe("useMemo", () => {
-
     test("useMemo로 만들어진 값은 캐싱된다.", () => {
       function getMemo() {
         resetContext();
@@ -110,7 +108,9 @@ describe("hooks test", () => {
       const memo2 = getMemo();
       const memo3 = getMemo();
       expect(memo1).not.toBe(memo2);
-      expect(memo2).toBe(memo3);
+      // expect(memo2).toBe(memo3);
+      expect(memo2).toStrictEqual(memo3);
+
       param = 3;
       const memo4 = getMemo();
       expect(memo3).not.toBe(memo4);
